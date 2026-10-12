@@ -1,16 +1,124 @@
-# React + Vite
+# EduLectures — Образовательная веб-платформа
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Интерактивная веб-платформа для поиска лекторов, изучения учебных дисциплин и записи на консультации. Разработана в рамках лабораторной работы по дисциплине «Разработка пользовательских интерфейсов» (РПИ).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠 Стек технологий и версии
 
-## React Compiler
+| Технология | Версия | Назначение |
+| :--- | :--- | :--- |
+| **Node.js** | `>= 20.x` (тестировалось на `24.21.0`) | Среда выполнения JavaScript |
+| **React** | `^19.2.8` | UI-библиотека компонентов |
+| **React DOM** | `^19.2.8` | Рендеринг в DOM браузера |
+| **Vite** | `^8.3.0` | Быстрый сборщик проектов и dev-сервер |
+| **ESLint** | `^10.10.0` | Статический анализатор качества кода |
+| **CSS3** | Vanilla CSS | Стилизация (CSS-переменные, Flexbox, Grid, адаптивность) |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Команды для установки и запуска
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Клонирование репозитория
+```bash
+git clone https://github.com/Shonni123/Faizrahmanova_RPI.git
+cd Faizrahmanova_RPI
+```
+
+### 2. Установка зависимостей
+```bash
+npm install
+```
+
+### 3. Запуск в режиме разработки (Dev Server)
+```bash
+npm run dev
+```
+После запуска проект будет доступен по локальному адресу:
+👉 **http://localhost:5173/** (или http://127.0.0.1:5173/)
+
+*(Для пользователей Windows также доступен быстрый запуск через файл `start.bat` двойным кликом)*
+
+### 4. Сборка для production
+```bash
+npm run build
+```
+Собранные оптимизированные статические файлы будут сохранены в папку `dist/`.
+
+### 5. Предпросмотр production-сборки
+```bash
+npm run preview
+```
+
+---
+
+## 📁 Структура папок проекта
+
+Проект организован по модульному принципу (Folder-per-Component / Folder-per-Page). Все стили изолированы в соответствующих `.css` файлах, разметка — в `.jsx`, а логика — в хуках.
+
+```text
+lecture-platform/
+├── public/                     # Статические общедоступные ресурсы (иконки, логотипы)
+├── src/
+│   ├── assets/                 # Локальные медиа-ресурсы (фотографии лекторов, баннеры)
+│   ├── components/             # Переиспользуемые UI-компоненты
+│   │   ├── AuthModal/          # Модальное окно авторизации (AuthModal.jsx, AuthModal.css)
+│   │   ├── BookingModal/       # Модальное окно записи на консультацию (BookingModal.jsx, BookingModal.css)
+│   │   ├── Footer/             # Подвал сайта (Footer.jsx, Footer.css)
+│   │   ├── Header/             # Шапка сайта и меню (Header.jsx, Header.css)
+│   │   ├── LecturerCard/       # Карточка лектора с аккордеоном тем (LecturerCard.jsx, LecturerCard.css)
+│   │   ├── Modal/              # Базовый компонент модального окна (Modal.jsx, Modal.css)
+│   │   └── PartnerCard/        # Карточка компании-партнера (PartnerCard.jsx, PartnerCard.css)
+│   ├── data/                   # Статические данные платформы
+│   │   ├── index.js            # Единая точка экспорта данных
+│   │   ├── lecturers.js        # Данные преподавателей и список лекций (300+ тем)
+│   │   └── partners.js         # Данные компаний и вузов-партнеров
+│   ├── hooks/                  # Пользовательские React-хуки (бизнес-логика)
+│   │   ├── useAuth.js          # Логика входа, переключения ролей и валидации
+│   │   ├── useCoursesFilter.js # Мемоизированная фильтрация и поиск дисциплин
+│   │   └── useLecturers.js     # Поиск, фильтрация лекторов по полу и аккордеоны тем
+│   ├── pages/                  # Страницы приложения
+│   │   ├── About/              # О нас (AboutPage.jsx, AboutPage.css)
+│   │   ├── Courses/            # Дисциплины (CoursesPage.jsx, CoursesPage.css)
+│   │   ├── Home/               # Главная (HomePage.jsx, HomePage.css)
+│   │   ├── Lecturers/          # Каталог лекторов (LecturersPage.jsx, LecturersPage.css)
+│   │   └── Partners/           # Партнеры (PartnersPage.jsx, PartnersPage.css)
+│   ├── App.css                 # Стили глобального лейаута приложения
+│   ├── App.jsx                 # Корневой компонент и клиентский роутинг
+│   ├── index.css               # Глобальные стили, CSS-переменные темы и сброс отступов
+│   └── main.jsx                # Точка входа в React-приложение (монтирование в DOM)
+├── .gitignore                  # Исключения для Git (node_modules, dist и др.)
+├── index.html                  # Главный HTML-документ SPA
+├── package.json                # Манифест зависимостей и npm-скриптов
+├── start.bat                   # Скрипт быстрого запуска для Windows
+└── vite.config.js              # Конфигурация сборщика Vite
+```
+
+---
+
+## 🗄 Где лежат данные и как устроен роутинг
+
+### 1. Данные (`src/data/`)
+Все данные платформы хранятся в модуле `src/data/`:
+* **`src/data/lecturers.js`**:
+  * Содержит массив из 10 лекторов.
+  * У каждого лектора указаны ФИО, должность, ученая степень, опыт работы, контактная почта, пол (`'male'` / `'female'`), аватар и **30 детальных тем лекций** (суммарно свыше 300 учебных тем).
+* **`src/data/partners.js`**:
+  * Содержит информацию о партнерских компаниях и учебных заведениях (название, описание, категория, ссылки).
+* **`src/data/index.js`**:
+  * Выполняет роль фасада (централизованного экспорта данных), что позволяет импортировать данные одной строкой:
+    ```javascript
+    import { lecturers, partners } from '../data';
+    ```
+
+### 2. Роутинг (`src/App.jsx`)
+В проекте реализован быстрый **клиентский роутинг на основе состояния** (State-based SPA Routing):
+* **Управление вкладками:** Состояние текущего активного экрана хранится в корневом хуке `useState('home')` в файле `src/App.jsx`.
+* **Доступные разделы:**
+  * `'home'` — Главная страница (`HomePage`)
+  * `'partners'` — Список партнеров (`PartnersPage`)
+  * `'about'` — О платформе (`AboutPage`)
+  * `'lecturers'` — Каталог преподавателей с фильтрами (`LecturersPage`)
+  * `'courses'` — Каталог дисциплин (`CoursesPage`)
+* **Навигация:** Меню в компоненте `Header` передает выбранный `id` через функцию обратного вызова `setActiveTab(tab)`.
+* **Глубокая связка (Deep Linking):** Реализован сквозной переход со страницы «Дисциплины» на конкретного лектора. При клике на кнопку «Подробнее у лектора» функция `handleTabChange('lecturers', lecturerId)` автоматически переключает вкладку, раскрывает нужного преподавателя и плавно скроллит страницу к его карточке.
