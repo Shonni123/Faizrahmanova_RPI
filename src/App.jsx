@@ -11,55 +11,55 @@ import { useAuth } from './hooks/useAuth';
 import './App.css';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState('home');
-  const [selectedLecturerId, setSelectedLecturerId] = useState(null);
+    const [activeTab, setActiveTab] = useState('home');
+    const [selectedLecturerId, setSelectedLecturerId] = useState(null);
 
-  const auth = useAuth();
+    const auth = useAuth();
 
-  const handleTabChange = (tab, lecturerId = null) => {
-    setActiveTab(tab);
-    if (lecturerId) {
-      setSelectedLecturerId(lecturerId);
-    } else if (tab !== 'lecturers') {
-      setSelectedLecturerId(null);
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+    const handleTabChange = (tab, lecturerId = null) => {
+        setActiveTab(tab);
+        if (lecturerId) {
+            setSelectedLecturerId(lecturerId);
+        } else if (tab !== 'lecturers') {
+            setSelectedLecturerId(null);
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
-  return (
-    <div className="app-wrapper">
-      <Header
-        activeTab={activeTab}
-        setActiveTab={handleTabChange}
-        onOpenAuth={auth.openAuth}
-      />
+    return (
+        <div className="app-wrapper">
+            <Header
+                activeTab={activeTab}
+                setActiveTab={handleTabChange}
+                onOpenAuth={auth.openAuth}
+            />
 
-      <main className="main-content">
-        {activeTab === 'home' && <HomePage setActiveTab={handleTabChange} />}
-        {activeTab === 'partners' && <PartnersPage />}
-        {activeTab === 'about' && <AboutPage />}
-        {activeTab === 'lecturers' && (
-          <LecturersPage selectedLecturerId={selectedLecturerId} />
-        )}
-        {activeTab === 'courses' && <CoursesPage setActiveTab={handleTabChange} />}
-      </main>
+            <main className="main-content">
+                {activeTab === 'home' && <HomePage setActiveTab={handleTabChange} />}
+                {activeTab === 'partners' && <PartnersPage />}
+                {activeTab === 'about' && <AboutPage />}
+                {activeTab === 'lecturers' && (
+                    <LecturersPage selectedLecturerId={selectedLecturerId} />
+                )}
+                {activeTab === 'courses' && <CoursesPage setActiveTab={handleTabChange} />}
+            </main>
 
-      <Footer />
+            <Footer />
 
-      <AuthModal
-        isOpen={auth.isOpen}
-        onClose={auth.closeAuth}
-        role={auth.role}
-        setRole={auth.setRole}
-        email={auth.email}
-        setEmail={auth.setEmail}
-        password={auth.password}
-        setPassword={auth.setPassword}
-        isSuccess={auth.isSuccess}
-        onSubmit={auth.handleSubmit}
-      />
-    </div>
-  );
+            <AuthModal
+                isOpen={auth.isOpen}
+                onClose={auth.closeAuth}
+                role={auth.role}
+                setRole={auth.setRole}
+                email={auth.email}
+                setEmail={auth.setEmail}
+                password={auth.password}
+                setPassword={auth.setPassword}
+                isSuccess={auth.isSuccess}
+                onSubmit={auth.handleSubmit}
+            />
+        </div>
+    );
 }
 
 export default App;
